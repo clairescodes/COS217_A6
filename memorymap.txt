@@ -104,16 +104,26 @@
    0x4008cc <main+112>:	ret
 
    
-   <data memory map> 
+   <Data memory map> 
    ----------------------------------------------------
    Address (in hex) | Content (in hex) | Description
    ----------------------------------------------------
    0x420044         | 0x44             | grade variable
 
-   <bss memory map> 
+   <BSS memory map> 
    -----------------------------------------------------------
    Address (in hex) | Description | Content during "A+" attack
    -----------------------------------------------------------
-   0x420058         | name[0]
-   0x420059         | name[1]
-   0x42005A         | name[2]
+   0x420058         | name[0]     | 'A'
+   0x420059         | name[1]     | 'B'
+   0x42005A         | name[2]     | 'C'
+   0x42005B         | name[3]     | 'D'
+
+   0x420087         | name[47]    | return address?? (not sure)
+
+
+   <Stack memory map> 
+   -----------------------------------------------------------
+   Offset | Description 
+   -----------------------------------------------------------
+   
