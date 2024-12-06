@@ -137,4 +137,3 @@
    64     | buf[32] - buf[39]
    72     | buf[40] - buf[47]
    80     | main's x30 (return address)
-
