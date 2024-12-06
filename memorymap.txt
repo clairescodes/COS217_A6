@@ -118,12 +118,24 @@
    0x420059         | name[1]     | 'B'
    0x42005A         | name[2]     | 'C'
    0x42005B         | name[3]     | 'D'
-
+   ... 
    0x420087         | name[47]    | return address?? (not sure)
 
 
    <Stack memory map> 
-   -----------------------------------------------------------
+   -----------------------------------------------------------------
    Offset | Description 
-   -----------------------------------------------------------
-   
+   -----------------------------------------------------------------
+   0      | x19 is pushed onto stack (0x4007c4, saved by readString)
+   8      | x20 is pushed onto stack (0x4007c4, saved by readString)
+   16     | x21 is pushed onto stack (0x4007c8, saved by readString)
+   24     | x30 is pushed onto stack = return to getName (0x4007c8) 
+   32     | buf[0] to buf[7] (0x4007f4 - loop) 
+   40     | buf[8] to buf[15] (0x4007f4 - loop)
+   48     | buf[16] to buf[23] (0x4007f4 - loop)
+   56     | buf[24] to buf[31] (0x4007f4 - loop)
+   64     | buf[32] to buf[39] (0x4007f4 - loop)
+   72     | buf[40] to buf[47] (0x4007f4 - loop)
+   80     | x30 is pushed onto stack = return to main (0x400834, 
+            saved by getName)
+
