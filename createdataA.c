@@ -14,7 +14,6 @@
  */
 int main() {
     FILE *file; 
-    int i; 
     unsigned int MOV, STRB, B; 
 
     file = fopen("dataA", "wb");
