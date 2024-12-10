@@ -1,3 +1,8 @@
+/*-------------------------------------------------------------------*/
+/* createdataB.c                                                     */
+/* Author: Emily Qian, Claire Shin                                   */
+/*-------------------------------------------------------------------*/
+
 /*
  * createdataB.c 
  * Produces a file called dataB with the student name, a nullbyte,

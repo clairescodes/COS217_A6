@@ -1,5 +1,9 @@
+/*-------------------------------------------------------------------*/
+/* createdataA.c                                                     */
+/* Author: Emily Qian, Claire Shin                                   */
+/*-------------------------------------------------------------------*/
+
 /*
- * createdataA.c
  * Produces a file called dataA with the student name, 
  * a null terminator, padding to overrun the stack, and 
  * injected instructions (via mini-assembler functions) 
