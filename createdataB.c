@@ -20,7 +20,7 @@
 int main(void) {
     int i;
 
-    /* student name for the grader output */
+    /* student name for grader output */
     char name[] = "Shin Qian";
 
     /* address to overwrite return pointer */
@@ -35,7 +35,7 @@ int main(void) {
     fwrite(name, sizeof(char), sizeof(name) - 1, psFile);
 
     /* write null bytes to fill buffer and reach return address. 
-    Number of bytes is 48 - 9 = 39. */
+    Number of bytes is 48 - student name length = 39. */
     for (i = 0; i < 39; i++) {
         fputc(0x00, psFile); 
     }

