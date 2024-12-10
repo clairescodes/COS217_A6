@@ -5,7 +5,6 @@
  * in main to get a B, the latter of which will overwrite getName's
  * stored x30
  */
-
 #include <stdio.h>
 #include <stdlib.h>
 
