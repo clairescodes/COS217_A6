@@ -105,35 +105,70 @@
 
    
    <Data memory map> 
-   ----------------------------------------------------
    Address (in hex) | Content (in hex) | Description
-   ----------------------------------------------------
    0x420044         | 0x44             | grade variable
 
    <BSS memory map> 
-   ---------------------------------
    Address (in hex) | Description  
-   ---------------------------------
    0x420058         | name[0]      
    0x420059         | name[1]      
-   0x42005A         | name[2]     
-   0x42005B         | name[3]      
-   ... 
+   0x42005a         | name[2]     
+   0x42005b         | name[3]
+   0x42005c         | name[4]
+   0x42005d         | name[5]
+   0x42005e         | name[6]
+   0x42005f         | name[7]
+   0x420060         | name[8]
+   0x420061         | name[9]
+   0x420062         | name[10]
+   0x420063         | name[11]
+   0x420064         | name[12]
+   0x420065         | name[13]
+   0x420066         | name[14]
+   0x420067         | name[15]
+   0x420068         | name[16]
+   0x420069         | name[17]
+   0x42006a         | name[18]
+   0x42006b         | name[19]
+   0x42006c         | name[20]
+   0x42006d         | name[21]
+   0x42006e         | name[22]
+   0x42006f         | name[23]
+   0x420070         | name[24]
+   0x420071         | name[25]
+   0x420072         | name[26]
+   0x420073         | name[27]
+   0x420074         | name[28]
+   0x420075         | name[29]
+   0x420076         | name[30]
+   0x420077         | name[31]
+   0x420078         | name[32]
+   0x420079         | name[33]
+   0x42007a         | name[34]
+   0x42007b         | name[35]
+   0x42007c         | name[36]
+   0x42007d         | name[37]
+   0x42007e         | name[38]
+   0x42007f         | name[39]
+   0x420080         | name[40]
+   0x420081         | name[41]
+   0x420082         | name[42]
+   0x420083         | name[43]
+   0x420084         | name[44]
+   0x420085         | name[45]
+   0x420086         | name[46]
    0x420087         | name[47]     
 
 
    <Stack memory map> 
-   -----------------------------------------------------------------
    Offset | Description 
-   -----------------------------------------------------------------
    0      | x19 register saved by readString (Grade)
    8      | x20 register saved by readString (i)
    16     | x21 register saved by readString (c) 
-   24     | getName's x30 (return address)
-   32     | buf[0] - buf[7]
-   40     | buf[8] - buf[15]
-   48     | buf[16] - buf[23]
-   56     | buf[24] - buf[31]
-   64     | buf[32] - buf[39]
-   72     | buf[40] - buf[47]
-   80     | main's x30 (return address)
+   24     | buf[0] - buf[7]
+   32     | buf[8] - buf[15]
+   40     | buf[16] - buf[23]
+   48     | buf[24] - buf[31]
+   56     | buf[32] - buf[39]
+   64     | buf[40] - buf[47]
+   72     | getName's x30 (return address)
