@@ -24,7 +24,7 @@ int main() {
 
     /* write name and null terminator to file. 
     grader program will ... */ 
-    fwrite("Claire Shin", 1, 11, file);
+    fwrite("Claire Shin", 1, 12, file);
     // fputc('\0', file);
 
     /* add padding so that buffer overflow can be performed 
