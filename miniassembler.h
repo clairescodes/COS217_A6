@@ -1,6 +1,6 @@
 /*--------------------------------------------------------------------*/
 /* miniassembler.h                                                    */
-/* Author: Bob Dondero, Donna Gabai                                   */
+/* Author: Bob Dondero, Donna Gabai, Emily Qian, Claire Shin          */
 /*--------------------------------------------------------------------*/
 
 #ifndef MINIASSEMBLER_INCLUDED
@@ -55,6 +55,19 @@ unsigned int MiniAssembler_strb(unsigned int uiFromReg,
 unsigned int MiniAssembler_b(unsigned long ulAddr,
    unsigned long ulAddrOfThisInstr);
 
+/*--------------------------------------------------------------------*/
 
+/* Return the machine language equivalent of "bl addr", 
+   where "bl" stands for "branch with link". This instruction branches 
+   to the given address and saves the return address in register X30.
+
+   Parameters:
+      ulAddr: the address denoted by addr, that is, the address to
+         which the branch should occur (must be a multiple of 4).
+      ulAddrOfThisInstr: the address of the bl instruction itself
+         (must be a multiple of 4).                                   */
+
+unsigned int MiniAssembler_bl(unsigned long ulAddr,
+   unsigned long ulAddrOfThisInstr);
 
 #endif
