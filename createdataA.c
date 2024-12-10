@@ -19,7 +19,7 @@ int main() {
     /* write name and null terminator to file. 
     grader program will ... */ 
     char name[] = "Claire Shin";
-    FILE *psFile = fopen("dataB", "wb");
+    psFile = fopen("dataB", "wb");
     if (psFile == NULL) {
         perror("Error opening file"); 
         return 1;  /* Return error code if file opening fails */
