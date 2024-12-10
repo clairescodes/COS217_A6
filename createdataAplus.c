@@ -2,6 +2,7 @@
 /* createdataAplus.c                                                  */
 /* Author: Emily Qian, Claire Shin                                    */
 /*--------------------------------------------------------------------*/
+
 /*
  * Purpose: Produces a file named "dataAplus" that manipulates the grader
  * program's behavior to produce an A+ grade. This is achieved by crafting
@@ -20,7 +21,7 @@
  * Accepts no input arguments and interacts solely via the output file.
  */
 int main(void) {
-    char* name = "Qian_Shin";
+    char* name = "Shin Qian";
     int i;
     unsigned long instructionAddress;
     unsigned int movInstruction, adrInstruction, strbInstruction, branchInstruction;
